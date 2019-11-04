@@ -3,6 +3,14 @@
 #include <math.h>
 #include "b_32.h"
 #include "a_32.h"
+#include "b_10.h"
+#include "a_10.h"
+#include "x_32.h"
+
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
+#include "lodepng.h"
+
 
 
 #define mat_elem(a, y, x, n) (a + ((y) * (n) + (x)))
@@ -23,21 +31,6 @@ void swap_row(float* a, float* b, int r1, int r2)
 		tmp = *p1, * p1 = *p2, * p2 = tmp;
 	}
 	tmp = b[r1], b[r1] = b[r2], b[r2] = tmp;
-}
-
-void matrix_multiplication(float a[N][N], float b[], float* x) {
-	double temp;
-	//matrix multiplication -- need to parallelize
-	for (int row = N - 1; row >= 0; row--) {
-		//store the value of b[i] in a temp variable
-		temp = b[row];
-		//iterate over the column in A and multiply by the value of b
-		for (int j = N - 1; j > row; j--)
-			temp -= x[j] * a[row][j];
-		//divide by A ? 
-		x[row] = temp / a[row][row];
-	}
-
 }
 
 //input two full arrays a and b, one empty array x and size of x and b
@@ -80,21 +73,54 @@ void gauss_eliminate(float a[][N], float b[], float* x)
 		}
 	}
 
-	//where we need to use threads
-	matrix_multiplication(a, b, x);
+	double temp;
+	//matrix multiplication -- need to parallelize
+	for (int row = N - 1; row >= 0; row--) {
+		//store the value of b[i] in a temp variable
+		temp = b[row];
+		//iterate over the column in A and multiply by the value of b
+		for (int j = N - 1; j > row; j--)
+			temp -= x[j] * a[row][j];
+		//divide by A 
+		x[row] = temp / a[row][row];
+	}
+}
+
+__global__ void matrix_multiplication(float a[N][N], float b[], float* x) {
+	
+	
+	for (int i = 0; i < N; i++)
+	{
+		x[i] = 0;
+		for (int j = 0; j < N; j++)
+			x[i] += a[i][j] * b[j];
+	}
+
 }
 
 int main(void)
 {
-	//float a[N][N] = { {1, 2}, {18, 20} };
-	//float b[N] = {4, 5};
+	float a[N][N] = { {1, 4}, {2, 4} };
+	float b[N] = {-18, 15};
+	
+	int number_threads = 32; 
 	float x[N];
 	int i;
 
 	
-	gauss_eliminate(A_32, b_32, x);
+
+	float b_10[10] =
+	{
+	 2046, 4845, 4189, 3989, 7990, 6908, 7677, 7187, 8653, 6864
+	};
+
+	//If running the matrix inversion and multiplication together run the following	
+	//gauss_eliminate(A_10, b_10, x);
 	//gauss_eliminate(a, b, x);
 
+	//if running only the multiplication part run the following instruction.
+	matrix_multiplication(A_32, X_32, x);
+		
 	for (i = 0; i < N; i++)
 		printf("%g\n", x[i]);
 
