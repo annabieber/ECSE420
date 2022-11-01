@@ -1,0 +1,36 @@
+﻿  Compiling CUDA source file kernel.cu...
+  
+  C:\Users\karti\source\repos\420_project\420_project>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\bin\nvcc.exe" -gencode=arch=compute_35,code=\"sm_35,compute_35\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\bin\HostX86\x64" -x cu  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\kernel.cu.obj "C:\Users\karti\source\repos\420_project\420_project\kernel.cu" 
+C:/Users/karti/source/repos/420_project/420_project/kernel.cu(15): warning C4005: 'RAND_MAX': macro redefinition
+C:\Users\karti\source\repos\420_project\420_project\Node.cpp(3): error : invalid redeclaration of type name "Node"
+  (3): here
+  
+C:\Users\karti\source\repos\420_project\420_project\Board.cpp(46): warning : missing return statement at end of non-void function "Board::getNodeByCoord"
+  
+C:\Users\karti\source\repos\420_project\420_project\Board.cpp(57): error : a pointer to a bound function may only be used to call the function
+  
+C:\Users\karti\source\repos\420_project\420_project\Board.cpp(58): warning : missing return statement at end of non-void function "Board::setNodeByIndex"
+  
+C:/Users/karti/source/repos/420_project/420_project/kernel.cu(22): error : a pointer to a bound function may only be used to call the function
+  
+C:/Users/karti/source/repos/420_project/420_project/kernel.cu(35): error : a pointer to a bound function may only be used to call the function
+  
+C:/Users/karti/source/repos/420_project/420_project/kernel.cu(36): error : a pointer to a bound function may only be used to call the function
+  
+C:/Users/karti/source/repos/420_project/420_project/kernel.cu(37): error : a pointer to a bound function may only be used to call the function
+  
+C:/Users/karti/source/repos/420_project/420_project/kernel.cu(25): warning : variable "nodeIndex" was set but never used
+  
+C:/Users/karti/source/repos/420_project/420_project/kernel.cu(72): error : identifier "play" is undefined
+  
+C:/Users/karti/source/repos/420_project/420_project/kernel.cu(77): error : identifier "checkWin" is undefined
+  
+C:/Users/karti/source/repos/420_project/420_project/kernel.cu(86): warning : variable "currentNode" is used before its value is set
+  
+C:/Users/karti/source/repos/420_project/420_project/kernel.cu(80): warning : variable "bestHeuristic" was declared but never referenced
+  
+C:/Users/karti/source/repos/420_project/420_project/kernel.cu(120): warning : missing return statement at end of non-void function "checkWin"
+  
+  8 errors detected in the compilation of "C:/Users/karti/AppData/Local/Temp/tmpxft_00004c78_00000000-7_kernel.cpp1.ii".
+  kernel.cu
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\BuildCustomizations\CUDA 10.1.targets(764,9): error MSB3721: The command ""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\bin\nvcc.exe" -gencode=arch=compute_35,code=\"sm_35,compute_35\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\bin\HostX86\x64" -x cu  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\kernel.cu.obj "C:\Users\karti\source\repos\420_project\420_project\kernel.cu"" exited with code 1.
